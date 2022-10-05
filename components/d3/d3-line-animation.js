@@ -26,7 +26,7 @@ class LineComponent {
 
   createAxis = (width, height) => {
     // Initialise a X axis:
-    this.x = d3.scaleLinear().range([width - 100, 100]);
+    // this.x = d3.scaleLinear().range([width - 100, 100]);
     this.x = d3.scaleLinear().range([0, width]);
     this.xAxis = d3.axisBottom().scale(this.x);
     this.svg
@@ -59,17 +59,24 @@ class LineComponent {
     const defaultMin = 0;
 
     // Create the X axis:
-    this.x.domain([(minX < defaultMin) ? minX : defaultMin, (maxX > defaultMax) ? maxX : defaultMax]);
+    this.x.domain([
+      minX < defaultMin ? minX : defaultMin,
+      maxX > defaultMax ? maxX : defaultMax,
+    ]);
     this.svg.selectAll(".myXaxis").transition().duration(3000).call(this.xAxis);
 
     // create the Y axis
-    this.y.domain([(minY < defaultMin) ? minY : defaultMin, (maxY > defaultMax) ? maxY : defaultMax]);
+    this.y.domain([
+      minY < defaultMin ? minY : defaultMin,
+      maxY > defaultMax ? maxY : defaultMax,
+    ]);
     this.svg.selectAll(".myYaxis").transition().duration(3000).call(this.yAxis);
 
     // Create a update selection: bind to the new data
     const u = this.svg.selectAll(".lineTest").data([data], function (d) {
       return d.ser1;
     });
+    // console.log("u: ", u)
     let x = this.x,
       y = this.y;
     // Updata the line

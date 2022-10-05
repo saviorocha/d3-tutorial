@@ -16,6 +16,7 @@ const Animation = () => {
   }
 
   function update() {
+    console.log("data", data)
     d3.select("svg")
       .selectAll("circle")
       .style("fill", "#ff00007f")
